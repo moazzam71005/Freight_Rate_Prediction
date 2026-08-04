@@ -1,7 +1,7 @@
 """
 generate_report.py
 Generates a multi-page PDF assessment report using matplotlib.
-Run AFTER solution.py has produced all outputs.
+Run AFTER solution.py file has produced all outputs..
 """
 from __future__ import annotations
 
