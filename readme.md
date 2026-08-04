@@ -25,13 +25,13 @@ python score.py --predictions validation_predictions.csv --december-predictions 
 
 This produces:
 
-- `validation_predictions.csv` — predictions for all 12,000 validation loads
-- `december-chart-inputs.csv` — filled December fixed-lane rates
-- `scorer_results/candidate_december.png` — December prediction chart
+- `validation_predictions.csv` : predictions for all 12,000 validation loads
+- `december-chart-inputs.csv` : filled December fixed-lane rates
+- `scorer_results/candidate_december.png` : December prediction chart
 
 ## Approach
 
-- **Split:** time-based — train Jan–Sep, hold out Oct, predict Nov–Dec
+- **Split:** time-based : train Jan–Sep, hold out Oct, predict Nov–Dec
 - **Model:** LightGBM + XGBoost ensemble (log-target), inverse-RMSE weighted
 - **Hold-out:** RMSE ~$639, MAPE ~6.1%
 
