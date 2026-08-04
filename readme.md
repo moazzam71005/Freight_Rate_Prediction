@@ -1,26 +1,47 @@
-# Freight Rate Prediction Challenge
+# Freight Rate Prediction — SpotterLabs Assessment
 
-See `Freight_Rate_ML_Assessment.pdf` for the assessment instructions.
+Machine learning solution for predicting freight load rates.
 
-## What to do
-
-1. Train and validate your model using `data/train_test.csv`.
-2. Predict every load in `data/validation.csv`. Each load has a unique `load_id`.
-3. Fill the matching `predicted_rate` values in `data/validation_predictions_template.csv` and save it as `validation_predictions.csv`.
-4. Predict every row in `data/december_chart_inputs.csv` by filling its `predicted_rate` column.
-5. Install the scorer requirements and run:
+## Setup
 
 ```bash
 pip install -r requirements.txt
+```
+
+## Reproduce
+
+Place the Spotter data files in this directory:
+
+- `train-test.csv`
+- `validation.csv`
+- `december-chart-inputs.csv` (empty `predicted_rate` column)
+
+Then run:
+
+```bash
 python solution.py
 python score.py --predictions validation_predictions.csv --december-predictions december-chart-inputs.csv
 ```
 
-The scorer validates both files and creates `scorer_results/candidate_december.png`.
+This produces:
 
-## Submit
+- `validation_predictions.csv` — predictions for all 12,000 validation loads
+- `december-chart-inputs.csv` — filled December fixed-lane rates
+- `scorer_results/candidate_december.png` — December prediction chart
 
-- GitHub repository containing your code, dependencies, and run instructions
-- `validation_predictions.csv`
-- PDF or DOCX report containing your validation, data split approach and `candidate_december.png`
-- 2-3 minute Loom link
+## Approach
+
+- **Split:** time-based — train Jan–Sep, hold out Oct, predict Nov–Dec
+- **Model:** LightGBM + XGBoost ensemble (log-target), inverse-RMSE weighted
+- **Hold-out:** RMSE ~$639, MAPE ~6.1%
+
+## Repo contents
+
+| File | Description |
+|---|---|
+| `solution.py` | Training, feature engineering, and prediction pipeline |
+| `score.py` | Provided scorer (validates outputs + December chart) |
+| `generate_report.py` | Builds `report.pdf` |
+| `validation_predictions.csv` | Final validation predictions |
+| `requirements.txt` | Python dependencies |
+| `report.pdf` | Written report (split approach + December chart) |
