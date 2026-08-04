@@ -1,4 +1,4 @@
-# Freight Rate Prediction — SpotterLabs Assessment
+# Freight Rate Prediction - SpotterLabs Assessment
 
 Machine learning solution for predicting freight load rates.
 
